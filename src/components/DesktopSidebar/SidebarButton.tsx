@@ -12,7 +12,13 @@ export default function SidebarButton({
   action,
   open,
 }: {
-  action: { name: string; icon: ReactNode; target: string; end?: boolean };
+  action: {
+    name: string;
+    icon: ReactNode;
+    activeIcon?: ReactNode;
+    target: string;
+    end?: boolean;
+  };
   open: boolean;
 }) {
   const pathMatching = useMatch(action.target + (action.end ? "" : "/*"));
@@ -41,7 +47,9 @@ export default function SidebarButton({
             justifyContent: "center",
           }}
         >
-          {action.icon}
+          {pathMatching != null && action.activeIcon
+            ? action.activeIcon
+            : action.icon}
         </ListItemIcon>
         <ListItemText primary={action.name} sx={{ opacity: open ? 1 : 0 }} />
       </ListItemButton>

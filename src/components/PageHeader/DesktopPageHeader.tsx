@@ -1,4 +1,4 @@
-import { ArrowBack, Search } from "@mui/icons-material";
+import { Menu, Search } from "@mui/icons-material";
 import {
   AppBar,
   Box,
@@ -12,19 +12,24 @@ import {
 } from "@mui/material";
 import HeaderProps from "./headerProps";
 import ElevationScroll from "../ElevationScroll";
+import { ExpandDesktopSidebar } from "../../atoms";
+import { useAtom } from "jotai";
 
 export default function DesktopPageHeader(props: HeaderProps) {
+  const [sidebarExpanded, setSidebarExpanded] = useAtom(ExpandDesktopSidebar);
+  const handleSidebarToggle = () => {
+    setSidebarExpanded(!sidebarExpanded);
+  };
+
   return (
     <ElevationScroll>
       <AppBar>
-        <Toolbar sx={{ px: 1 }}>
-          {!props.noBackButton && (
-            <Tooltip title="Back">
-              <IconButton>
-                <ArrowBack />
-              </IconButton>
-            </Tooltip>
-          )}
+        <Toolbar sx={{ pl: "12px !important" }}>
+          <Tooltip title="Show/Hide Sidebar">
+            <IconButton onClick={handleSidebarToggle}>
+              <Menu />
+            </IconButton>
+          </Tooltip>
           <Typography variant="h5" sx={{ flex: 1, px: 1 }}>
             {props.title}
           </Typography>

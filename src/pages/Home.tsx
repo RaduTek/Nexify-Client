@@ -1,16 +1,15 @@
 import { List } from "@mui/material";
 import TrackListItem from "../components/TrackListItem";
+import PageHeader from "../components/PageHeader";
 
 export default function HomePage() {
   return (
     <>
-      <div>Home</div>
+      <PageHeader title="Home" />
       <List>
-        <TrackListItem />
-        <TrackListItem />
-        <TrackListItem />
-        <TrackListItem />
-        <TrackListItem />
+        {[...Array(15)].map((value, index) => (
+          <TrackListItem key={index} />
+        ))}
       </List>
     </>
   );

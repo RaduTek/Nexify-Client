@@ -12,9 +12,12 @@ import {
 import { useState } from "react";
 import HeaderProps from "./headerProps";
 import ElevationScroll from "../ElevationScroll";
+import { useNavigate } from "react-router-dom";
 
 export default function MobilePageHeader(props: HeaderProps) {
   const [searchBoxOpen, setSearchBoxOpen] = useState(false);
+  const navigate = useNavigate();
+
   return (
     <ElevationScroll>
       <AppBar>
@@ -44,7 +47,11 @@ export default function MobilePageHeader(props: HeaderProps) {
           <Toolbar sx={{ px: 1 }}>
             {!props.noBackButton && (
               <Tooltip title="Back">
-                <IconButton>
+                <IconButton
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                >
                   <ArrowBack />
                 </IconButton>
               </Tooltip>
